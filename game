@@ -1,0 +1,40 @@
+// Starting Ch. 6 next.
+
+draw = () => {
+  clear()
+  const lines = 10
+  range(lines).forEach(i => {
+    print(8 * i, 8 * i, 'Hello world!', i % 7)
+  })
+}
+
+initialState = {
+  totalElapsed: 0, // total time passed
+  rotations: [], // each rectangle's individual rotation
+  
+}
+
+const getRotation = (milliseconds, i) => {
+  return Math.sin(milliseconds / 400) * 16 * (i + 1)
+  
+}
+
+update = (state, input, elapsed) => {
+ state.totalElapsed += elapsed
+ state.rotations = range(8).map(i => getRotation(state.totalElapsed, i))
+}
+
+draw = (state) => {
+  clear()
+  const { angle } = state
+  range(8).forEach(i => {
+    const angle = 5
+    const halfSide = 8 * i / 2
+    const topLeft = [64 - halfSide, 64 - halfSide]
+    const topRight = [64 + halfSide, 64 - halfSide]
+    const bottomRight = [64 + halfSide, 64 + halfSide]
+    const bottomLeft = [64 - halfSide, 64 + halfSide]
+    const color = i % 7
+    polyStroke([topLeft, topRight, bottomRight, bottomLeft], angle, color)
+  })
+}
