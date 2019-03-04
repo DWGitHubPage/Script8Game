@@ -1,4 +1,4 @@
-// Starting Ch. 6 next.
+// Starting Ch. 7 next.
 
 draw = () => {
   clear()
