@@ -38,3 +38,27 @@ draw = (state) => {
     polyStroke([topLeft, topRight, bottomRight, bottomLeft], angle, color)
   })
 }
+initialState = {
+  x: 0,
+  y: 112
+  flipH: false
+}
+
+update = (state, input) => {
+  if (input.left) {
+    state.x -= 1
+    state.flipH = true
+  }
+
+  if (input.right) {
+    state.x += 1
+    state.flipH = false
+  }
+
+}
+
+draw = state => {
+  clear()
+  map()
+  sprite(state.x, state.y, 0, 0, state.flipH)
+}
