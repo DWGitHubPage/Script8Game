@@ -1,11 +1,9 @@
-// Starting Ch. 7 next.
+// Starting Ch. 8 next.
 
-draw = () => {
+draw = state => {
   clear()
-  const lines = 10
-  range(lines).forEach(i => {
-    print(8 * i, 8 * i, 'Hello world!', i % 7)
-  })
+  map()
+  sprite(state.x, state.y, state.sprite, 0, state.flipH)
 }
 
 initialState = {
@@ -40,9 +38,13 @@ draw = (state) => {
 }
 initialState = {
   x: 0,
-  y: 112
+  y: 112,
+  sprite: 0,
+  counter: 0,
   flipH: false
 }
+
+const walkCycle = [1, 2, 3, 4, 5, 6]
 
 update = (state, input) => {
   if (input.left) {
@@ -53,6 +55,14 @@ update = (state, input) => {
   if (input.right) {
     state.x += 1
     state.flipH = false
+  }
+if (input.left || input.right) {
+    const slowCounter = Math.floor(state.counter / 5)
+    state.sprite = walkCycle[state.counter % 6]
+    state.counter++
+  } else {
+    state.sprite = 0
+    state.counter = 0
   }
 
 }
